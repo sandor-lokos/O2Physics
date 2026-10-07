@@ -775,42 +775,42 @@ struct SGFITAnalyzer {
         registry.get<TH1>(HIST("tracks/QCPVC"))->Fill(4., track.hasTOF() * 1.);
         registry.get<TH1>(HIST("tracks/ptPVC"))->Fill(track.pt(), 1.);
         //        registry.get<TH2>(HIST("tracks/etavsptPVC"))->Fill(vtrk.Eta(), track.pt(), 1.);
-        if (truegapSide == 0) {
-          pva++;
-          avPtPVa += track.pt();
-          vecEtaPVa.push_back(vtrk.Eta());
-          registry.get<TH1>(HIST("tracks/etaApv"))->Fill(vtrk.Eta(), 1.);
-          if (!an)
-            registry.get<TH1>(HIST("tracks/eta2Apv"))->Fill(vtrk.Eta(), 1.);
-          if (!an)
-            z0pva++;
-          else if (an == 4)
-            z1pva++;
-        }
-        if (truegapSide == 1) {
-          pvc++;
-          avPtPVc += track.pt();
-          vecEtaPVc.push_back(vtrk.Eta());
-          registry.get<TH1>(HIST("tracks/etaCpv"))->Fill(vtrk.Eta(), 1.);
-          if (!cn)
-            registry.get<TH1>(HIST("tracks/eta2Cpv"))->Fill(vtrk.Eta(), 1.);
-          if (!cn)
-            z0pvc++;
-          else if (cn == 4)
-            z1pvc++;
-        }
-        if (truegapSide == 2) {
-          pvac++;
-          avPtPVac += track.pt();
-          vecEtaPVac.push_back(vtrk.Eta());
-          registry.get<TH1>(HIST("tracks/etaACpv"))->Fill(vtrk.Eta(), 1.);
-          if (!an && !cn)
-            registry.get<TH1>(HIST("tracks/eta2ACpv"))->Fill(vtrk.Eta(), 1.);
-          if (!an && !cn)
-            z0pvac++;
-          else if (an >= 3 && cn >= 3)
-            z1pvac++;
-        }
+				if (truegapSide == 0) {
+					pva++;
+					avPtPVa += track.pt();
+					vecEtaPVa.push_back(vtrk.Eta());
+					registry.get<TH1>(HIST("tracks/etaApv"))->Fill(vtrk.Eta(), 1.);
+					if (!an) {
+						registry.get<TH1>(HIST("tracks/eta2Apv"))->Fill(vtrk.Eta(), 1.);
+						z0pva++;
+					} else if (an == 4) {
+						z1pva++;
+					}
+				}
+				if (truegapSide == 1) {
+					pvc++;
+					avPtPVc += track.pt();
+					vecEtaPVc.push_back(vtrk.Eta());
+					registry.get<TH1>(HIST("tracks/etaCpv"))->Fill(vtrk.Eta(), 1.);
+					if (!cn) {
+						registry.get<TH1>(HIST("tracks/eta2Cpv"))->Fill(vtrk.Eta(), 1.);
+						z0pvc++;
+					} else if (cn == 4) {
+						z1pvc++;
+					}
+				}
+				if (truegapSide == 2) {
+					pvac++;
+					avPtPVac += track.pt();
+					vecEtaPVac.push_back(vtrk.Eta());
+					registry.get<TH1>(HIST("tracks/etaACpv"))->Fill(vtrk.Eta(), 1.);
+					if (!an && !cn) {
+						registry.get<TH1>(HIST("tracks/eta2ACpv"))->Fill(vtrk.Eta(), 1.);
+						z0pvac++;
+					} else if (an >= 3 && cn >= 3) {
+						z1pvac++;
+					}
+				}
         registry.get<TH2>(HIST("tracks/TPCSignalvspPVC"))->Fill(vtrk.Mag(), signalTPC, 1.);
         registry.get<TH2>(HIST("tracks/TOFSignalvspPVC"))->Fill(vtrk.Mag(), signalTOF, 1.);
       }
